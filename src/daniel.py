@@ -1,3 +1,24 @@
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from sklearn.cluster import KMeans
+from sklearn.decomposition import NMF
+from sklearn import metrics
+
+# removes punctuation and stopwords. replaces strings with lowercase and outputs top 1000 features. 
+tfidf = TfidfVectorizer(lowercase=True, stop_words='english', max_features = 1000)
+
+tfidf_ngrams = TfidfVectorizer(lowercase=True, stop_words='english', max_features = 1000, ngram_range=(1,2))
+
+count_vec = TfidfVectorizer(lowercase=True, stop_words='english', max_features = 1000)
+
+count_vec_ngrams = TfidfVectorizer(lowercase=True, stop_words='english', max_features = 1000, ngram_range=(1,2))
+
+for transformers in [tfidf,tfidf_ngrams,count_vec,count_vec_ngrams]:
+    transformers.fit(X)
+
+X_tfidf = tfidf.transform(X)
+
+
+
 K = range(1,50)
 fig,ax = plt.subplots()
 score=[]
